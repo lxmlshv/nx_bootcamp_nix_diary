@@ -7,4 +7,5 @@
 if [[ $1 == add ]]
 then
     echo "Команда add"
+    return
 fi

@@ -1,14 +1,22 @@
 #! /bin/bash
-echo "compiling..."
+echo "Собираю diary.sh"
 { \
-    cat src/diary_head.sh; \
-    tail +2 src/diary_help.sh; \
-    tail +2 src/diary_install.sh; \
-    tail +2 src/diary_add.sh; \
-    tail +2 src/diary_config.sh; \
-    tail +2 src/diary_stats.sh; \
-    tail +2 src/diary_delete.sh; \
-    tail +2 src/diary_trash.sh; \
-    tail +2 src/diary_backup.sh; \
+    echo "#! /bin/bash"; \
+    echo "function diary()"; \
+    echo "{"; \
+    tail +2 src/diary_head.sh; echo ""; \
+    tail +2 src/diary_help.sh; echo ""; \
+    tail +2 src/diary_add.sh; echo ""; \
+    tail +2 src/diary_config.sh; echo ""; \
+    tail +2 src/diary_stats.sh; echo ""; \
+    tail +2 src/diary_delete.sh; echo ""; \
+    tail +2 src/diary_trash.sh; echo ""; \
+    tail +2 src/diary_backup.sh; echo ""; \
+    tail +2 src/diary_tail.sh; echo ""; \
+    echo "}"; \
+    tail +2 src/completion.sh; echo ""; \
 } > diary.sh
-echo "All done!"
+cat <<EOF
+Готово! Для установки используйте команду
+    . install.sh
+EOF

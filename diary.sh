@@ -1,4 +1,6 @@
 #! /bin/bash
+function diary()
+{
 
 #
 # diary - приложение для ведения дневника
@@ -8,34 +10,27 @@
 # Обработка запуска без команды
 #
 
-if (( $# == 0))
 # TODO: проверить установку
+
+if (( $# == 0))
 then
-cat <<EOF
-Для установки приложения используйте команду
-    . diary.sh install
-Для вывода списка команд используйте команду
-    . diary.sh help
+    cat <<EOF
+Вывод пяти последних записей
 EOF
-return
+    return
 fi
+
+
 #
 # Команда help | -h | --help
 #
 
-# TODO: проверить команды -h и --help тоже
 if [[ $1 == help || $1 == -h || $1 == --help ]]
 then
     echo "Команда help"
+    return
 fi
-#
-# Команда install [-d <имя_папки_с_записями>] [-e <редактор_по_умолчанию>]
-#
 
-if [[ $1 == install ]]
-then
-    echo "Команда install"
-fi
 #
 # Команда add [-t <имя_шаблона>] [<Заголовок записи>]
 #
@@ -43,7 +38,9 @@ fi
 if [[ $1 == add ]]
 then
     echo "Команда add"
+    return
 fi
+
 #
 # Команда config
 #   config [-d <имя_папки_с_записями>]
@@ -53,7 +50,9 @@ fi
 if [[ $1 == config ]]
 then
     echo "Команда config"
+    return
 fi
+
 #
 # Команда stats
 #
@@ -61,7 +60,9 @@ fi
 if [[ $1 == stats ]]
 then
     echo "Команда stats"
+    return
 fi
+
 #
 # Команда delete [ID_записи]
 #
@@ -69,7 +70,9 @@ fi
 if [[ $1 == delete ]]
 then
     echo "Команда delete"
+    return
 fi
+
 #
 # Команда trash
 #
@@ -77,7 +80,9 @@ fi
 if [[ $1 == trash ]]
 then
     echo "Команда trash"
+    return
 fi
+
 #
 # Команда backup [<пусть_к_файлу_бэкапа>]
 #
@@ -85,4 +90,22 @@ fi
 if [[ $1 == backup ]]
 then
     echo "Команда backup"
+    return
 fi
+
+#
+# сообщение о неверной команде
+#
+
+echo "Команда $1 не найдена."
+}
+
+function _diary
+{
+    local word opts
+    COMPREPLY=()
+    word="${COMP_WORDS[COMP_CWORD]}"
+    opts="add backup config delete help stats trash"
+    COMPREPLY=( $(compgen -W "${opts}" -- ${word}) )
+}
+complete -F _diary diary

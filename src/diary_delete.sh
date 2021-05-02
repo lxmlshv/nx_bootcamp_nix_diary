@@ -7,4 +7,5 @@
 if [[ $1 == delete ]]
 then
     echo "Команда delete"
+    return
 fi

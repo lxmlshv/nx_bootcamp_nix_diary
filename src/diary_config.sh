@@ -9,4 +9,5 @@
 if [[ $1 == config ]]
 then
     echo "Команда config"
+    return
 fi
