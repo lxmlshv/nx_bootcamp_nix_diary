@@ -63,7 +63,7 @@ then
 	while read -r ENTRY_PATH
 	do
 		echo -n "$ENTRY_PATH" | grep -Po "[^/_]*(?=__)|(?<=__)[^/_]*" | tr "\n" " "
-		cat "$ENTRY_PATH" | grep -Po "(?<=# ).*$"
+		cat "$ENTRY_PATH" | grep -Po "(?<=# ).*$" | head -1
 	done
 	return
 fi
