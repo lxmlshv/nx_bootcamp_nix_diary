@@ -6,6 +6,6 @@
 
 if [[ $1 == stats ]]
 then
-	echo "Команда stats"
+	echo "Записей в дневнике:" $(ls -1q "$DIARY_PATH"/*/*/*.md | wc -l)
 	return
 fi

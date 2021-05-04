@@ -5,7 +5,6 @@ then
 	. "$HOME/.bashrc"
 	echo "Diary установлен. Используйте diary help для получения списка команд."
 else
-	echo "Not installed"
 	read -r -p "Добавить diary.sh в ~/.bashrc? " ANSWER
 	if [[ "$ANSWER" =~ ^[yY1]+.*$ ]]
 	then
