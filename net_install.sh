@@ -1,5 +1,7 @@
 #!/bin/bash
-mkdir ${HOME}/diary
+if [ ! -d ${HOME}/diary ]; then
+    mkdir ${HOME}/diary
+fi
 curl https://raw.githubusercontent.com/lxmlshv/nx_bootcamp_nix_diary/main/diary.sh > "${HOME}/diary/.diary.sh"
 DIARY_INSTALLED=$(grep -c "source ${HOME}/diary/.diary.sh" "$HOME/.bashrc")
 if (( DIARY_INSTALLED == 1))

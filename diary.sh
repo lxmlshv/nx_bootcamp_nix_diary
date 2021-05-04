@@ -137,7 +137,7 @@ then
 		fi
 		printf -v DIARY_PATH "%q" "$1"
 		export DIARY_PATH
-		sed -i "s/^export DIARY_PATH=.*/export DIARY_PATH=${DIARY_PATH//\//\\/}/" "$PWD/diary.sh"
+		sed -i "s/^export DIARY_PATH=.*/export DIARY_PATH=${DIARY_PATH//\//\\/}/" "${HOME}/diary/.diary.sh"
 		return
 	fi
 	return
@@ -199,4 +199,4 @@ function _diary
 	COMPREPLY=( $(compgen -W "${opts}" -- ${word}) )
 }
 complete -F _diary diary
-export DIARY_PATH=/home/alex/newdiary
+export DIARY_PATH="${HOME}/diary"
