@@ -6,6 +6,6 @@
 
 if [[ $1 == backup ]]
 then
-    echo "Команда backup"
-    return
+	echo "Команда backup"
+	return
 fi

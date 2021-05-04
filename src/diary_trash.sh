@@ -6,6 +6,6 @@
 
 if [[ $1 == trash ]]
 then
-    echo "Команда trash"
-    return
+	echo "Команда trash"
+	return
 fi
