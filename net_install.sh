@@ -10,7 +10,7 @@ then
 	echo "Diary установлен. Используйте diary help для получения списка команд."
     return
 fi
-read -r -p "Добавить /${HOME}/.diary.sh в ~/.bashrc? " ANSWER
+read -r -p "Добавить ${HOME}/.diary.sh в ~/.bashrc? " ANSWER
 if [[ "$ANSWER" =~ ^[yY1]+.*$ ]]
 then
     { echo ""; echo -n "source ${HOME}/diary/.diary.sh"; } >> "${HOME}/.bashrc"
