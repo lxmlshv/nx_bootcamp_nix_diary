@@ -16,7 +16,8 @@ echo "Собираю diary.sh"
 	echo "}"; \
 	tail +2 src/completion.sh; echo ""; \
 	echo "export DIARY_PATH=\"\${HOME}/diary\""; \
-} > diary.sh
+} > "$HOME/diary/.diary.sh"
+cat "$HOME/diary/.diary.sh" > diary.sh
 cat <<EOF
 Готово! Для установки используйте команду
 	. install.sh
