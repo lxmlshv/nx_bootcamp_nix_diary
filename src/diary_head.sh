@@ -50,7 +50,6 @@ fi
 if (( $# == 0))
 then
 	if ! compgen -G "$DIARY_PATH/*/*/*.md" > /dev/null; then
-	# if [[ ! -e $DIARY_PATH/*/*/*.md ]]; then
 		cat <<-EOF
 			В дневнике ещё нет записей.
 			Добавьте новую запись с помощью команды

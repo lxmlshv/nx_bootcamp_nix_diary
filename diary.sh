@@ -52,7 +52,6 @@ fi
 if (( $# == 0))
 then
 	if ! compgen -G "$DIARY_PATH/*/*/*.md" > /dev/null; then
-	# if [[ ! -e $DIARY_PATH/*/*/*.md ]]; then
 		cat <<-EOF
 			В дневнике ещё нет записей.
 			Добавьте новую запись с помощью команды
@@ -184,7 +183,18 @@ fi
 
 if [[ $1 == delete ]]
 then
-	echo "Команда delete"
+	shift
+	if (( $# == 0)); then
+		echo "Не указан ID записи которую требуется удалить"
+		return
+	fi
+	DIARY_DELETE_ENTRY=$(ls -rt $DIARY_PATH/*/*/*.md | grep "$1")
+	if [[ -z $DIARY_DELETE_ENTRY ]]; then
+		echo "Запись не найдена"
+		return
+	fi
+	mv "$DIARY_DELETE_ENTRY" "$DIARY_PATH/.deleted"
+	echo "Запись удалена"
 	return
 fi
 
@@ -194,7 +204,18 @@ fi
 
 if [[ $1 == trash ]]
 then
-	echo "Команда trash"
+	if ! compgen -G "$DIARY_PATH/.deleted/*.md" > /dev/null; then
+		cat <<-EOF
+			Вы не удалили ни одной записи.
+		EOF
+		return
+	fi
+	ls -rt $DIARY_PATH/.deleted/*.md | \
+	while read -r ENTRY_PATH
+	do
+		echo -n "$ENTRY_PATH" | grep -Po "[^/_]*(?=__)|(?<=__)[^/_]*" | tr "\n" " "
+		cat "$ENTRY_PATH" | grep -Po "(?<=# ).*$"
+	done
 	return
 fi
 
